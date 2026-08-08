@@ -1,2 +1,2 @@
 # Playground
-Just a playground where i test things
+Just a playground where i test things.
