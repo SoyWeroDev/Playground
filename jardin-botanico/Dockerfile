@@ -34,6 +34,10 @@ WORKDIR /var/www/html
 # Crear proyecto Laravel fresco
 RUN composer create-project laravel/laravel . --prefer-dist --no-interaction
 
+# IMPORTANTE: Eliminar el .env auto-generado (tiene DB_CONNECTION=sqlite por defecto)
+# Laravel usara las variables de entorno del sistema inyectadas por Coolify
+RUN rm -f .env
+
 # Sobrescribir con archivos personalizados del proyecto
 COPY backend/bootstrap/app.php bootstrap/app.php
 COPY backend/routes/api.php routes/api.php
