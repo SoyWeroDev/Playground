@@ -38,9 +38,6 @@ RUN composer create-project laravel/laravel . --prefer-dist --no-interaction
 # Laravel usara las variables de entorno del sistema inyectadas por Coolify
 RUN rm -f .env
 
-# Forzar APP_DEBUG para diagnosticar el error 500 (TEMPORAL)
-RUN sed -i "s/<?php/<?php\n\nputenv('APP_DEBUG=true');\n/" public/index.php
-
 # Sobrescribir con archivos personalizados del proyecto
 COPY backend/bootstrap/app.php bootstrap/app.php
 COPY backend/routes/api.php routes/api.php

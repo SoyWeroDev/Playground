@@ -7,8 +7,7 @@ echo "============================================"
 
 # Cachar configuración usando el entorno de CLI (donde están las variables de Coolify)
 echo "Cachando configuracion..."
-# TEMPORALMENTE DESHABILITADO PARA VER EL ERROR 500
-# php artisan config:cache
+php artisan config:cache
 php artisan route:cache || true
 php artisan view:cache || true
 
