@@ -38,6 +38,9 @@ RUN composer create-project laravel/laravel . --prefer-dist --no-interaction
 # Laravel usara las variables de entorno del sistema inyectadas por Coolify
 RUN rm -f .env
 
+# Forzar APP_DEBUG para diagnosticar el error 500 (TEMPORAL)
+RUN sed -i "s/<?php/<?php\n\nputenv('APP_DEBUG=true');\n/" public/index.php
+
 # Sobrescribir con archivos personalizados del proyecto
 COPY backend/bootstrap/app.php bootstrap/app.php
 COPY backend/routes/api.php routes/api.php
@@ -63,6 +66,9 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
 
 # Habilitar .htaccess para el routing de Laravel
 RUN sed -i 's|AllowOverride None|AllowOverride All|g' /etc/apache2/apache2.conf
+
+# Asegurar permisos de lectura en la carpeta public
+RUN chmod -R 755 public
 
 # Permisos de Laravel
 RUN chown -R www-data:www-data storage bootstrap/cache \
