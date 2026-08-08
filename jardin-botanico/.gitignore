@@ -1,0 +1,13 @@
+# Archivos de entorno - NUNCA subir al repositorio
+.env
+*.env.local
+
+# Dependencias
+node_modules/
+vendor/
+
+# Build outputs
+/frontend/dist
+
+# Logs
+*.log

@@ -1,7 +1,54 @@
 services:
-  web:
-    build: .
-    ports:
-      - "8080:80"
+  # ─────────────────────────────────────────────
+  # Backend - PHP 8.3 + Apache + Laravel
+  # Variables de entorno inyectadas por Coolify
+  # ─────────────────────────────────────────────
+  backend:
+    build: ./backend
+    container_name: jardin-backend
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_DEBUG=${APP_DEBUG}
+      - APP_URL=${APP_URL}
+      - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    networks:
+      - jardin-net
+
+  # ─────────────────────────────────────────────
+  # Frontend - React + Tailwind (Vite dev server)
+  # ─────────────────────────────────────────────
+  frontend:
+    build: ./frontend
+    container_name: jardin-frontend
     volumes:
-      - ./public:/var/www/html/public
+      - ./frontend/src:/app/src
+      - ./frontend/index.html:/app/index.html
+    networks:
+      - jardin-net
+
+  # ─────────────────────────────────────────────
+  # Nginx - Proxy reverso
+  # Puerto 80 para la URL de produccion
+  # ─────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: jardin-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - jardin-net
+
+networks:
+  jardin-net:
+    driver: bridge

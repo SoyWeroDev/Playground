@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────
+   Theme - Jardin Botanico Virtual
+   ───────────────────────────────────────────── */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-garden-darkest: #040806;
+  --color-garden-dark: #0a0f0d;
+  --color-garden-mid: #1a2f1a;
+  --color-garden-green: #0d1a0d;
+  --color-garden-accent: #4ade80;
+  --color-garden-accent-dim: #22c55e;
+  --color-garden-glow: rgba(74, 222, 128, 0.25);
+  --color-garden-gold: #fbbf24;
+
+  --color-cell-empty: rgba(255, 255, 255, 0.03);
+  --color-cell-hover: rgba(74, 222, 128, 0.08);
+  --color-cell-border: rgba(255, 255, 255, 0.06);
+  --color-cell-border-hover: rgba(74, 222, 128, 0.25);
+
+  --color-glass-bg: rgba(255, 255, 255, 0.04);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+}
+
+/* ─────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: linear-gradient(145deg, #040806 0%, #0a1a0a 30%, #0d2010 60%, #060e08 100%);
+  min-height: 100vh;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+/* ─────────────────────────────────────────────
+   Animations
+   ───────────────────────────────────────────── */
+@keyframes plant-appear {
+  0% {
+    transform: scale(0) rotate(-10deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes plant-grow {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  40% {
+    transform: scale(1.18);
+    filter: brightness(1.4) drop-shadow(0 0 8px rgba(74, 222, 128, 0.6));
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes plant-die {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  25% {
+    transform: scale(1.1) rotate(8deg);
+    filter: hue-rotate(-40deg) brightness(1.2);
+  }
+  50% {
+    transform: scale(0.9) rotate(-8deg);
+    filter: hue-rotate(-80deg) brightness(0.8);
+  }
+  75% {
+    transform: scale(0.5) rotate(12deg);
+    opacity: 0.5;
+    filter: hue-rotate(-120deg) brightness(0.5);
+  }
+  100% {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+    filter: hue-rotate(-180deg) brightness(0.2);
+  }
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-6px) scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Animation utility classes */
+.animate-plant-appear {
+  animation: plant-appear 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-plant-grow {
+  animation: plant-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-plant-die {
+  animation: plant-die 0.7s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+.animate-breathe {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────────
+   Glassmorphism Utilities
+   ───────────────────────────────────────────── */
+.glass-panel {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1.25rem;
+}
+
+.glass-stat {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+}
