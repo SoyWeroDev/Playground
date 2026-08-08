@@ -5,7 +5,13 @@ echo "============================================"
 echo "  Jardin Botanico Virtual - Backend Init"
 echo "============================================"
 
-# Cachar configuración usando el entorno de CLI (donde están las variables de Coolify)
+# Crear un .env minimo para forzar APP_DEBUG y otras variables criticas al cachear
+echo "APP_DEBUG=true" > .env
+echo "APP_ENV=production" >> .env
+echo "SESSION_DRIVER=file" >> .env
+echo "CACHE_STORE=file" >> .env
+
+# Cachar configuración
 echo "Cachando configuracion..."
 php artisan config:cache
 php artisan route:cache || true
