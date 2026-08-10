@@ -163,11 +163,13 @@ export default function Accordion() {
                           window.dispatchEvent(ev);
                         }}
                       >
-                        <span className="keyboard-key">{key}</span>
-                        {/* Pequeña nota superpuesta opcional */}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity bg-black/60 rounded-full text-white text-[10px]">
-                           {displayNote}
-                        </div>
+                        {/* Nota Principal */}
+                        <span className="text-sm font-black text-white drop-shadow-md z-10 transition-all">{displayNote}</span>
+                        
+                        {/* Indicador de tecla (muy pequeño) */}
+                        <span className="absolute bottom-1 right-2 text-[8px] text-white/40 font-mono z-10">
+                          {key === 'SHIFT' ? 'SH' : key}
+                        </span>
                       </div>
                     );
                   })}
