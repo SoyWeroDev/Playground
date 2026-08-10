@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as Tone from 'tone';
 
 export function useAudio() {
@@ -7,8 +7,8 @@ export function useAudio() {
   const activeNotesRef = useRef(new Set());
 
   useEffect(() => {
-    // Configurar el sintetizador para que suene como un acordeon (simulacion)
-    // Para calidad final, esto se reemplazaria por un Tone.Sampler con archivos .wav reales
+    // Para calidad final, esto se cambiará por Tone.Sampler
+    // Ej: const sampler = new Tone.Sampler({ urls: { A3: "A3.wav" }, baseUrl: "/sounds/" }).toDestination();
     const synth = new Tone.PolySynth(Tone.Synth, {
       oscillator: {
         type: "fatsawtooth",
@@ -16,14 +16,13 @@ export function useAudio() {
         spread: 30
       },
       envelope: {
-        attack: 0.05, // Entrada rapida pero no instantanea
+        attack: 0.05,
         decay: 0.1,
-        sustain: 1.0, // El acordeon mantiene el volumen mientras presionas
-        release: 0.4  // Cae un poco lento al soltar (fuelle)
+        sustain: 1.0,
+        release: 0.4
       }
     }).toDestination();
     
-    // Agregar un poco de chorus para darle ese sonido ancho caracteristico
     const chorus = new Tone.Chorus(4, 2.5, 0.5).toDestination().start();
     synth.connect(chorus);
 
@@ -34,25 +33,33 @@ export function useAudio() {
     if (!isReady) {
       await Tone.start();
       setIsReady(true);
-      console.log('Audio Engine (Tone.js) Started');
+      console.log('Audio Engine Started');
     }
   };
 
-  const playNote = useCallback((note) => {
+  // Esta función compara las notas que deben sonar vs las que ya están sonando
+  const setPlayingNotes = (notesArray) => {
     if (!isReady || !synthRef.current) return;
-    if (!activeNotesRef.current.has(note)) {
-      activeNotesRef.current.add(note);
-      synthRef.current.triggerAttack(note, Tone.now());
-    }
-  }, [isReady]);
 
-  const releaseNote = useCallback((note) => {
-    if (!isReady || !synthRef.current) return;
-    if (activeNotesRef.current.has(note)) {
-      activeNotesRef.current.delete(note);
-      synthRef.current.triggerRelease(note, Tone.now());
-    }
-  }, [isReady]);
+    const newNotes = new Set(notesArray);
+    const currentNotes = activeNotesRef.current;
 
-  return { isReady, initAudio, playNote, releaseNote, activeNotes: activeNotesRef.current };
+    // Notas nuevas (hay que atacarlas)
+    for (const note of newNotes) {
+      if (!currentNotes.has(note)) {
+        synthRef.current.triggerAttack(note, Tone.now());
+        currentNotes.add(note);
+      }
+    }
+
+    // Notas viejas que ya no están (hay que soltarlas)
+    for (const note of currentNotes) {
+      if (!newNotes.has(note)) {
+        synthRef.current.triggerRelease(note, Tone.now());
+        currentNotes.delete(note);
+      }
+    }
+  };
+
+  return { isReady, initAudio, setPlayingNotes };
 }

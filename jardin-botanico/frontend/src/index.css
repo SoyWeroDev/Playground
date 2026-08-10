@@ -1,27 +1,100 @@
 @import "tailwindcss";
 
 @theme {
-  --color-accordion-bg: #111111;
-  --color-accordion-bellows: #222222;
-  --color-key-white: #f0f0f0;
-  --color-key-black: #1a1a1a;
-  --color-primary: #d946ef; /* Fuchsia for accents */
+  --color-baffetti-red: #c61111;
+  --color-baffetti-dark: #8b0000;
+  --color-grill: #2a2a2a;
+  --color-bellows: #151515;
+  --color-pearl: #fdfbf7;
 }
 
 @layer base {
   body {
-    background-color: #050505;
+    background-color: #111;
     color: white;
     font-family: 'Inter', system-ui, sans-serif;
     margin: 0;
     overflow: hidden; /* Prevent scrolling when playing */
+    background-image: radial-gradient(circle at center, #222 0%, #000 100%);
   }
+}
+
+/* Acordeón Carcasa Roja */
+.accordion-body {
+  background: linear-gradient(135deg, var(--color-baffetti-red), var(--color-baffetti-dark));
+  border-radius: 24px;
+  box-shadow: 
+    inset 0 0 20px rgba(0,0,0,0.5),
+    inset -5px -5px 15px rgba(0,0,0,0.4),
+    inset 5px 5px 15px rgba(255,255,255,0.3),
+    0 20px 50px rgba(0,0,0,0.8);
+  border: 2px solid #5a0000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Textura sutil para la pintura */
+.accordion-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Parrilla (Grill) del acordeón */
+.accordion-grill {
+  background: radial-gradient(circle at center, #333 0%, #111 100%);
+  border: 4px solid #444;
+  border-radius: 12px;
+  box-shadow: inset 0 10px 20px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5);
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.5) 10px, rgba(0,0,0,0.5) 12px),
+    repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(0,0,0,0.5) 10px, rgba(0,0,0,0.5) 12px);
+}
+
+/* Botones Perlados Diatónicos */
+.diatonic-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #e6e6e6, #b3b3b3);
+  box-shadow: 
+    inset -2px -2px 6px rgba(0,0,0,0.4),
+    inset 2px 2px 6px rgba(255,255,255,0.9),
+    0 4px 6px rgba(0,0,0,0.6);
+  border: 1px solid #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.diatonic-button:active, .diatonic-button.active {
+  transform: translateY(4px) scale(0.95);
+  box-shadow: 
+    inset -1px -1px 3px rgba(0,0,0,0.6),
+    inset 2px 2px 5px rgba(255,255,255,0.5),
+    0 0px 2px rgba(0,0,0,0.8);
+  background: radial-gradient(circle at 30% 30%, #e6e6e6, #cccccc, #999999);
+}
+
+/* Indicador de letra en el botón */
+.diatonic-button span {
+  font-size: 11px;
+  font-weight: 800;
+  color: #333;
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+  pointer-events: none;
 }
 
 /* Fuelle Animation */
 @keyframes bellows-breathe {
   0% { transform: scaleX(1); }
-  50% { transform: scaleX(1.05); }
+  50% { transform: scaleX(1.1); }
   100% { transform: scaleX(1); }
 }
 
@@ -29,48 +102,18 @@
   animation: bellows-breathe 2s ease-in-out infinite;
 }
 
-/* Glassmorphism for UI panels */
-.glass-panel {
-  background: rgba(20, 20, 20, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+/* Fuelle Push (hacia adentro) */
+@keyframes bellows-push {
+  0% { transform: scaleX(1.1); }
+  100% { transform: scaleX(0.9); }
+}
+.bellows-push {
+  transform: scaleX(0.9);
+  transition: transform 0.3s ease-out;
 }
 
-/* Piano Keys */
-.piano-key {
-  transition: all 0.1s ease;
-  transform-origin: top;
-}
-
-.piano-key:active, .piano-key.active {
-  transform: scaleY(0.98);
-  filter: brightness(0.9);
-}
-
-.white-key {
-  background: linear-gradient(to bottom, #fff, #e0e0e0);
-  border-radius: 0 0 8px 8px;
-  border: 1px solid #ccc;
-  border-top: none;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 -2px 5px rgba(0,0,0,0.1);
-}
-
-.white-key.active {
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.4), inset 0 -4px 8px rgba(0,0,0,0.2);
-}
-
-.black-key {
-  background: linear-gradient(to bottom, #333, #000);
-  border-radius: 0 0 6px 6px;
-  border: 1px solid #000;
-  border-top: none;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.5), inset 0 -1px 2px rgba(255,255,255,0.2);
-  z-index: 10;
-}
-
-.black-key.active {
-  background: linear-gradient(to bottom, #222, #000);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.6), inset 0 -2px 4px rgba(255,255,255,0.1);
+/* Fuelle Pull (hacia afuera) */
+.bellows-pull {
+  transform: scaleX(1.1);
+  transition: transform 0.3s ease-out;
 }
