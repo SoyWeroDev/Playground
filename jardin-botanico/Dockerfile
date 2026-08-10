@@ -32,7 +32,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 # Crear proyecto Laravel fresco
-RUN composer create-project laravel/laravel . --prefer-dist --no-interaction
+RUN composer create-project laravel/laravel . --prefer-dist --no-interaction --no-scripts
 
 # IMPORTANTE: Eliminar el .env auto-generado (tiene DB_CONNECTION=sqlite por defecto)
 # Laravel usara las variables de entorno del sistema inyectadas por Coolify
