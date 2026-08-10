@@ -21,7 +21,7 @@ export default function Accordion() {
         const { row, index } = btnInfo;
         const noteObj = tuning[row][index];
         if (noteObj) {
-          notesToPlay.push(isPushing ? noteObj.push : noteObj.pull);
+          notesToPlay.push(isPushing ? noteObj.pushNote : noteObj.pullNote);
         }
       }
     });
@@ -144,7 +144,7 @@ export default function Accordion() {
                     const isActive = activeButtons.has(key);
                     // Obtener la nota actual que sonaría para mostrarla en la UI (Opcional, pero ayuda)
                     const noteObj = tunings[selectedTuning][row.name][index];
-                    const displayNote = noteObj ? (isPushing ? noteObj.push : noteObj.pull).replace(/\d/g, '') : '';
+                    const displayNote = noteObj ? (isPushing ? noteObj.pushNote : noteObj.pullNote).replace(/\d/g, '') : '';
                     
                     return (
                       <div 
