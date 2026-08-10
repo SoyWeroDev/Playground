@@ -2,17 +2,19 @@ import { useEffect, useState } from 'react';
 
 // Mapeo adaptado a teclado Español ISO (31 botones: 10-11-10)
 export const buttonMap = {
-  // Row 3 (Derecha - 10 botones) -> Fila superior (QWERTYUIOP)
-  'Q': { row: 'row3', index: 0 },
-  'W': { row: 'row3', index: 1 },
-  'E': { row: 'row3', index: 2 },
-  'R': { row: 'row3', index: 3 },
-  'T': { row: 'row3', index: 4 },
-  'Y': { row: 'row3', index: 5 },
-  'U': { row: 'row3', index: 6 },
-  'I': { row: 'row3', index: 7 },
-  'O': { row: 'row3', index: 8 },
-  'P': { row: 'row3', index: 9 },
+  // Row 3 (Derecha - 10 botones) -> Fila superior (Empieza en W)
+  'W': { row: 'row3', index: 0 },
+  'E': { row: 'row3', index: 1 },
+  'R': { row: 'row3', index: 2 },
+  'T': { row: 'row3', index: 3 },
+  'Y': { row: 'row3', index: 4 },
+  'U': { row: 'row3', index: 5 },
+  'I': { row: 'row3', index: 6 },
+  'O': { row: 'row3', index: 7 },
+  'P': { row: 'row3', index: 8 },
+  '+': { row: 'row3', index: 9 },
+  '`': { row: 'row3', index: 9 },
+  '´': { row: 'row3', index: 9 },
   
   // Row 2 (Medio - 11 botones) -> Fila central (ASDFGHJKLÑ + ENTER)
   'A': { row: 'row2', index: 0 },
