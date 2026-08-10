@@ -1,24 +1,20 @@
 import { useEffect, useState } from 'react';
 
-// Mapeamos las filas de teclado a los índices de los botones
-// Columna 1 (Izquierda, F): 11 botones -> Empieza en X
-// Columna 2 (Medio, Bb): 12 botones -> Empieza en A
-// Columna 3 (Derecha, Eb): 11 botones -> Empieza en W
+// Mapeo adaptado a teclado Español ISO (31 botones: 10-11-10)
 export const buttonMap = {
-  // Row 3 (Derecha - 11 botones) -> Empieza en W
-  'W': { row: 'row3', index: 0 },
-  'E': { row: 'row3', index: 1 },
-  'R': { row: 'row3', index: 2 },
-  'T': { row: 'row3', index: 3 },
-  'Y': { row: 'row3', index: 4 },
-  'U': { row: 'row3', index: 5 },
-  'I': { row: 'row3', index: 6 },
-  'O': { row: 'row3', index: 7 },
-  'P': { row: 'row3', index: 8 },
-  '[': { row: 'row3', index: 9 },
-  ']': { row: 'row3', index: 10 },
+  // Row 3 (Derecha - 10 botones) -> Fila superior (QWERTYUIOP)
+  'Q': { row: 'row3', index: 0 },
+  'W': { row: 'row3', index: 1 },
+  'E': { row: 'row3', index: 2 },
+  'R': { row: 'row3', index: 3 },
+  'T': { row: 'row3', index: 4 },
+  'Y': { row: 'row3', index: 5 },
+  'U': { row: 'row3', index: 6 },
+  'I': { row: 'row3', index: 7 },
+  'O': { row: 'row3', index: 8 },
+  'P': { row: 'row3', index: 9 },
   
-  // Row 2 (Medio - 12 botones) -> Empieza en A
+  // Row 2 (Medio - 11 botones) -> Fila central (ASDFGHJKLÑ + ENTER)
   'A': { row: 'row2', index: 0 },
   'S': { row: 'row2', index: 1 },
   'D': { row: 'row2', index: 2 },
@@ -28,11 +24,10 @@ export const buttonMap = {
   'J': { row: 'row2', index: 6 },
   'K': { row: 'row2', index: 7 },
   'L': { row: 'row2', index: 8 },
-  ';': { row: 'row2', index: 9 },
-  "'": { row: 'row2', index: 10 },
-  '\\': { row: 'row2', index: 11 },
+  'Ñ': { row: 'row2', index: 9 },
+  'ENTER': { row: 'row2', index: 10 },
 
-  // Row 1 (Izquierda - 11 botones) -> Empieza en Z
+  // Row 1 (Izquierda - 10 botones) -> Fila inferior (ZXCVBNM,.-)
   'Z': { row: 'row1', index: 0 },
   'X': { row: 'row1', index: 1 },
   'C': { row: 'row1', index: 2 },
@@ -42,8 +37,7 @@ export const buttonMap = {
   'M': { row: 'row1', index: 6 },
   ',': { row: 'row1', index: 7 },
   '.': { row: 'row1', index: 8 },
-  '/': { row: 'row1', index: 9 },
-  'SHIFT': { row: 'row1', index: 10 },
+  '-': { row: 'row1', index: 9 },
 };
 
 export function useKeyboard() {

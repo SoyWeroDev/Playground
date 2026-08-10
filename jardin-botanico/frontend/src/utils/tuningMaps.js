@@ -3,7 +3,7 @@ import * as Tone from 'tone';
 // Mapeo detallado con frecuencias exactas basadas en A4=440Hz para el Acordeón FA (Fa/Sib/Mib - FBEb)
 // Registro Fundamental (Clarinete) - 34 Botones (11-12-11)
 const baseFBEb = {
-  // Hilera 1: FA (Exterior) - 11 botones
+  // Hilera 1: FA (Exterior) - 10 botones
   row1: [
     { id: 1, pushNote: 'B3', pushFreq: 246.94, pullNote: 'Db4', pullFreq: 277.18 },
     { id: 2, pushNote: 'F3', pushFreq: 174.61, pullNote: 'G3', pullFreq: 196.00 },
@@ -14,11 +14,10 @@ const baseFBEb = {
     { id: 7, pushNote: 'C5', pushFreq: 523.25, pullNote: 'Bb4', pullFreq: 466.16 },
     { id: 8, pushNote: 'F5', pushFreq: 698.46, pullNote: 'D5', pullFreq: 587.33 },
     { id: 9, pushNote: 'A5', pushFreq: 880.00, pullNote: 'E5', pullFreq: 659.25 },
-    { id: 10, pushNote: 'C6', pushFreq: 1046.50, pullNote: 'G5', pullFreq: 783.99 },
-    { id: 11, pushNote: 'F6', pushFreq: 1396.91, pullNote: 'Bb5', pullFreq: 932.33 }
+    { id: 10, pushNote: 'C6', pushFreq: 1046.50, pullNote: 'G5', pullFreq: 783.99 }
   ],
   
-  // Hilera 2: SIB (Medio) - 12 botones
+  // Hilera 2: SIB (Medio) - 11 botones
   row2: [
     { id: 1, pushNote: 'E3', pushFreq: 164.81, pullNote: 'F#3', pullFreq: 185.00 },
     { id: 2, pushNote: 'F3', pushFreq: 174.61, pullNote: 'A3', pullFreq: 220.00 },
@@ -30,11 +29,10 @@ const baseFBEb = {
     { id: 8, pushNote: 'F5', pushFreq: 698.46, pullNote: 'Eb5', pullFreq: 622.25 },
     { id: 9, pushNote: 'Bb5', pushFreq: 932.33, pullNote: 'G5', pullFreq: 783.99 },
     { id: 10, pushNote: 'D6', pushFreq: 1174.66, pullNote: 'A5', pullFreq: 880.00 },
-    { id: 11, pushNote: 'F6', pushFreq: 1396.91, pullNote: 'C6', pullFreq: 1046.50 },
-    { id: 12, pushNote: 'Bb6', pushFreq: 1864.66, pullNote: 'Eb6', pullFreq: 1244.51 }
+    { id: 11, pushNote: 'F6', pushFreq: 1396.91, pullNote: 'C6', pullFreq: 1046.50 }
   ],
 
-  // Hilera 3: MIB (Interior) - 11 botones
+  // Hilera 3: MIB (Interior) - 10 botones
   row3: [
     { id: 1, pushNote: 'Db4', pushFreq: 277.18, pullNote: 'B3', pullFreq: 246.94 },
     { id: 2, pushNote: 'Bb3', pushFreq: 233.08, pullNote: 'D4', pullFreq: 293.66 },
@@ -45,8 +43,7 @@ const baseFBEb = {
     { id: 7, pushNote: 'G5', pushFreq: 783.99, pullNote: 'F5', pullFreq: 698.46 },
     { id: 8, pushNote: 'Bb5', pushFreq: 932.33, pullNote: 'Ab5', pullFreq: 830.61 },
     { id: 9, pushNote: 'Eb6', pushFreq: 1244.51, pullNote: 'C6', pullFreq: 1046.50 },
-    { id: 10, pushNote: 'G6', pushFreq: 1567.98, pullNote: 'D6', pullFreq: 1174.66 },
-    { id: 11, pushNote: 'Bb6', pushFreq: 1864.66, pullNote: 'F6', pullFreq: 1396.91 }
+    { id: 10, pushNote: 'G6', pushFreq: 1567.98, pullNote: 'D6', pullFreq: 1174.66 }
   ]
 };
 

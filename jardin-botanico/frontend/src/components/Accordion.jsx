@@ -55,11 +55,11 @@ export default function Accordion() {
     );
   }
 
-  // Distribución visual de los botones: Izquierda (Z), Medio (A), Derecha (W)
+  // Distribución visual de los botones: Izquierda (Z), Medio (A), Derecha (Q)
   const visualRows = [
-    { name: 'row1', keys: ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'SHIFT'] },
-    { name: 'row2', keys: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '\\'] },
-    { name: 'row3', keys: ['W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']'] }
+    { name: 'row1', keys: ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '-'] },
+    { name: 'row2', keys: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ', 'ENTER'] },
+    { name: 'row3', keys: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'] }
   ];
 
   // Nombres dinámicos para las 3 hileras
@@ -168,7 +168,7 @@ export default function Accordion() {
                         
                         {/* Indicador de tecla (muy pequeño) */}
                         <span className="absolute bottom-1 right-2 text-[8px] text-white/40 font-mono z-10">
-                          {key === 'SHIFT' ? 'SH' : key}
+                          {key === 'ENTER' ? 'ENT' : key === 'SHIFT' ? 'SH' : key}
                         </span>
                       </div>
                     );
