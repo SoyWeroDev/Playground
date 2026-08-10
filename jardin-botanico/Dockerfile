@@ -52,7 +52,7 @@ COPY --from=frontend-builder /app/dist/index.html public/spa.html
 
 # Agregar ruta catch-all en Laravel para servir el SPA de React
 # Todas las rutas que no sean /api/* devuelven el index de React
-RUN printf "\n// Catch-all: sirve la SPA de React para rutas no-API\nRoute::get('/{any}', function () {\n    return response()->file(public_path('spa.html'));\n})->where('any', '.*');\n" >> routes/web.php
+RUN printf "<?php\n\nuse Illuminate\Support\Facades\Route;\n\n// Catch-all: sirve la SPA de React para rutas no-API\nRoute::get('/{any}', function () {\n    return response()->file(public_path('spa.html'));\n})->where('any', '.*');\n" > routes/web.php
 
 # Configurar Apache: DocumentRoot apunta a public/
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
