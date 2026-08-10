@@ -1,8 +1,11 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
-// Mapeamos las filas de teclado a los índices de los botones (0-11 para row1, 0-10 para las otras)
+// Mapeamos las filas de teclado a los índices de los botones
+// Columna 1 (Izquierda, F): 11 botones
+// Columna 2 (Medio, Bb): 12 botones
+// Columna 3 (Derecha, Eb): 11 botones
 export const buttonMap = {
-  // Row 1 (Exterior - 12 botones)
+  // Row 1 (Izquierda - 11 botones)
   'Q': { row: 'row1', index: 0 },
   'W': { row: 'row1', index: 1 },
   'E': { row: 'row1', index: 2 },
@@ -14,9 +17,8 @@ export const buttonMap = {
   'O': { row: 'row1', index: 8 },
   'P': { row: 'row1', index: 9 },
   '[': { row: 'row1', index: 10 },
-  ']': { row: 'row1', index: 11 },
   
-  // Row 2 (Medio - 11 botones)
+  // Row 2 (Medio - 12 botones)
   'A': { row: 'row2', index: 0 },
   'S': { row: 'row2', index: 1 },
   'D': { row: 'row2', index: 2 },
@@ -28,8 +30,9 @@ export const buttonMap = {
   'L': { row: 'row2', index: 8 },
   ';': { row: 'row2', index: 9 },
   "'": { row: 'row2', index: 10 },
+  '\\': { row: 'row2', index: 11 }, // Usamos la tecla arriba del enter / al lado para el 12vo
 
-  // Row 3 (Interior - 11 botones)
+  // Row 3 (Derecha - 11 botones)
   'Z': { row: 'row3', index: 0 },
   'X': { row: 'row3', index: 1 },
   'C': { row: 'row3', index: 2 },
@@ -40,20 +43,18 @@ export const buttonMap = {
   ',': { row: 'row3', index: 7 },
   '.': { row: 'row3', index: 8 },
   '/': { row: 'row3', index: 9 },
-  'SHIFT': { row: 'row3', index: 10 }, // Usamos Shift para el último botón
+  'SHIFT': { row: 'row3', index: 10 },
 };
 
 export function useKeyboard() {
   const [activeButtons, setActiveButtons] = useState(new Set());
-  const [isPushing, setIsPushing] = useState(false); // Fuelle hacia adentro (Push)
+  const [isPushing, setIsPushing] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.repeat) return; // Evitar el auto-repeat del SO
-
+      if (e.repeat) return;
       const key = e.key.toUpperCase();
       
-      // La barra espaciadora controla el fuelle (Push)
       if (key === ' ') {
         e.preventDefault();
         setIsPushing(true);
@@ -75,7 +76,7 @@ export function useKeyboard() {
       
       if (key === ' ') {
         e.preventDefault();
-        setIsPushing(false); // Soltar espacio = Pull (jalar)
+        setIsPushing(false);
         return;
       }
 
