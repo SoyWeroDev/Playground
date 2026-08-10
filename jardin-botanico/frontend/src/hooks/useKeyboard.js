@@ -32,18 +32,18 @@ export const buttonMap = {
   "'": { row: 'row2', index: 10 },
   '\\': { row: 'row2', index: 11 },
 
-  // Row 1 (Izquierda - 11 botones) -> Empieza en X
-  'X': { row: 'row1', index: 0 },
-  'C': { row: 'row1', index: 1 },
-  'V': { row: 'row1', index: 2 },
-  'B': { row: 'row1', index: 3 },
-  'N': { row: 'row1', index: 4 },
-  'M': { row: 'row1', index: 5 },
-  ',': { row: 'row1', index: 6 },
-  '.': { row: 'row1', index: 7 },
-  '/': { row: 'row1', index: 8 },
-  'SHIFT': { row: 'row1', index: 9 },
-  'Z': { row: 'row1', index: 10 }, // Z se mueve al final por falta de teclas en la fila
+  // Row 1 (Izquierda - 11 botones) -> Empieza en Z
+  'Z': { row: 'row1', index: 0 },
+  'X': { row: 'row1', index: 1 },
+  'C': { row: 'row1', index: 2 },
+  'V': { row: 'row1', index: 3 },
+  'B': { row: 'row1', index: 4 },
+  'N': { row: 'row1', index: 5 },
+  'M': { row: 'row1', index: 6 },
+  ',': { row: 'row1', index: 7 },
+  '.': { row: 'row1', index: 8 },
+  '/': { row: 'row1', index: 9 },
+  'SHIFT': { row: 'row1', index: 10 },
 };
 
 export function useKeyboard() {
