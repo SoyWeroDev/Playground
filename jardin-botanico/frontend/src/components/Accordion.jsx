@@ -55,11 +55,11 @@ export default function Accordion() {
     );
   }
 
-  // Distribución visual de los botones: Izquierda (Z), Medio (A), Derecha (Q)
+  // Distribución visual de los botones: Izquierda (X), Medio (A), Derecha (W)
   const visualRows = [
-    { name: 'row1', keys: ['Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'SHIFT'] },
+    { name: 'row1', keys: ['X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'SHIFT', 'Z'] },
     { name: 'row2', keys: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '\\'] },
-    { name: 'row3', keys: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '['] }
+    { name: 'row3', keys: ['W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']'] }
   ];
 
   // Nombres dinámicos para las 3 hileras
